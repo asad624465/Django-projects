@@ -1,0 +1,503 @@
+{% extends 'base.html' %}
+{% block main_cotents %}
+<style>
+	.pignose-layerslider {
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	
+	.pignose-layerslider,
+	.pignose-layerslider * {
+		box-sizing: content-box;
+		-o-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+	}
+	
+	.pignose-layerslider .slide-visual {
+		width: 1000px;
+		height: 500px;
+		margin: 0 auto;
+		position: relative;
+	}
+	
+	.pignose-layerslider .slide-visual .slide_tint {
+		position: absolute;
+		top: 0;
+		z-index: 50;
+		width: 2000px;
+		height: 100%;
+		background-color: #ffffff;
+		opacity: .6;
+		filter: alpha(opacity=60);
+		-ms-filter: alpha(opacity=60);
+	}
+	
+	.pignose-layerslider .slide-visual .slide_tint.left {
+		right: 1000px;
+	}
+	
+	.pignose-layerslider .slide-visual .slide_tint.right {
+		left: 1000px;
+	}
+	
+	.pignose-layerslider .slide-visual .slide-group {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap {
+		width: 276px;
+		height: 288px;
+		padding: 20px;
+		position: absolute;
+		top: 80px;
+		right: 100px;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .script-inner {
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .script-tint {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-color: #ffffff;
+		opacity: .6;
+		filter: alpha(opacity=60);
+		-ms-filter: alpha(opacity=60);
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .slide-pagination {
+		width: 100%;
+		*width: 84px;
+		position: absolute;
+		left: 0;
+		*left: 50%;
+		*margin-left: -62px;
+		bottom: 0;
+		padding: 40px 20px;
+		z-index: 60;
+		text-align: center;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .slide-pagination .btn-page {
+		display: inline-block;
+		*display: block;
+		*float: left;
+		width: 8px;
+		height: 8px;
+		margin: 0 2px;
+		border-radius: 50%;
+		border: 1px solid #ffffff;
+		text-indent: -10000px;
+		overflow: hidden;
+		-moz-transition: background-color .3s ease;
+		-webkit-transition: background-color .3s ease;
+		-o-transition: background-color .3s ease;
+		transition: background-color .3s ease;
+	}
+	.pignose-layerslider .slide-visual .script-wrap .slide-pagination .btn-page:hover,
+	.pignose-layerslider .slide-visual .script-wrap .slide-pagination .btn-page:focus {
+		background-color: #ffffff;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .slide-pagination .btn-page.on {
+		background-color: #ffffff;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .slide-controller {
+		position: absolute;
+		left: 0;
+		bottom: 84px;
+		width: 100%;
+		text-align: center;
+		z-index: 60;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .slide-controller a {
+		display: inline-block;
+		margin: 0 20px;
+		opacity: .6;
+		filter: alpha(opacity=60);
+		-ms-filter: alpha(opacity=60);
+		-moz-transition: opacity .3s ease;
+		-webkit-transition: opacity .3s ease;
+		-o-transition: opacity .3s ease;
+		transition: opacity .3s ease;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .slide-controller a:focus,
+	.pignose-layerslider .slide-visual .script-wrap .slide-controller a:hover {
+		opacity: 1;
+		filter: alpha(opacity=100);
+		-ms-filter: alpha(opacity=100);
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .script-group {
+		margin: 0;
+		padding: 0;
+		position: relative;
+		list-style: none;
+		z-index: 50;
+		overflow: hidden;
+	}
+	
+	.pignose-layerslider .slide-visual .script-wrap .script-group li {
+		float: left;
+	}
+</style>
+<div class="banner-grid">
+	<div id="visual">
+		<div class="slide-visual">
+			<!-- Slide Image Area (1000 x 424) -->
+			<ul class="slide-group">
+				<li><img class="img-responsive" src="static/assets/images/ba1.jpg" alt="Dummy Image" /></li>
+				<li><img class="img-responsive" src="static/assets/images/ba2.jpg" alt="Dummy Image" /></li>
+				<li><img class="img-responsive" src="static/assets/images/ba3.jpg" alt="Dummy Image" /></li>
+			</ul>
+
+			<!-- Slide Description Image Area (316 x 328) -->
+			<div class="script-wrap">
+				<ul class="script-group">
+					<li><div class="inner-script"><img class="img-responsive" src="static/assets/images/baa1.jpg" alt="Dummy Image" /></div></li>
+					<li><div class="inner-script"><img class="img-responsive" src="static/assets/images/baa2.jpg" alt="Dummy Image" /></div></li>
+					<li><div class="inner-script"><img class="img-responsive" src="static/assets/images/baa3.jpg" alt="Dummy Image" /></div></li>
+				</ul>
+				<div class="slide-controller">
+					<a href="#" class="btn-prev"><img src="static/assets/images/btn_prev.png" alt="Prev Slide" /></a>
+					<a href="#" class="btn-play"><img src="static/assets/images/btn_play.png" alt="Start Slide" /></a>
+					<a href="#" class="btn-pause"><img src="static/assets/images/btn_pause.png" alt="Pause Slide" /></a>
+					<a href="#" class="btn-next"><img src="static/assets/images/btn_next.png" alt="Next Slide" /></a>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<script type="text/javascript">
+	//<![CDATA[
+		$(window).load(function() {
+			$('#visual').pignoseLayerSlider({
+				play    : '.btn-play',
+				pause   : '.btn-pause',
+				next    : '.btn-next',
+				prev    : '.btn-prev'
+			});
+		});
+	//]]>
+	</script>
+
+</div>
+<!-- //banner -->
+<!-- content -->
+
+<div class="men-wear">
+	<div class="container">
+		<div class="col-md-4 products-left">
+			<div class="css-treeview">
+				<h4>Categories</h4>
+				<ul class="tree-list-pad">
+					<li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><span></span>Men's Wear</label>
+						<ul>
+							<li><input type="checkbox" id="item-0-0" /><label for="item-0-0">Ethinic Wear</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Caps</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+									<li><a href="mens.html">Trousers</a></li>
+								</ul>
+							</li>
+							<li><input type="checkbox"  id="item-0-1" /><label for="item-0-1">Party Wear</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Caps</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+									<li><a href="mens.html">Trousers</a></li>
+								</ul>
+							</li>
+							<li><input type="checkbox"  id="item-0-2" /><label for="item-0-2">Casual Wear</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Caps</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+									<li><a href="mens.html">Trousers</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1">Best Collections</label>
+						<ul>
+							<li><input type="checkbox" checked="checked" id="item-1-0" /><label for="item-1-0">New Arrivals</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+								</ul>
+							</li>
+							
+						</ul>
+					</li>
+					<li><input type="checkbox" checked="checked" id="item-2" /><label for="item-2">Best Offers</label>
+						<ul>
+							<li><input type="checkbox"  id="item-2-0" /><label for="item-2-0">Summer Discount Sales</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+								</ul>
+							</li>
+							<li><input type="checkbox" id="item-2-1" /><label for="item-2-1">Exciting Offers</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+								</ul>
+							</li>
+							<li><input type="checkbox" id="item-2-2" /><label for="item-2-2">Flat Discounts</label>
+								<ul>
+									<li><a href="mens.html">Shirts</a></li>
+									<li><a href="mens.html">Shoes</a></li>
+									<li><a href="mens.html">Pants</a></li>
+									<li><a href="mens.html">SunGlasses</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-8 products-right" style="margin-top: -30px;">
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g3.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g3.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html">Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/ep4.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/ep4.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html">Watches</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$119.99</span>
+							<del>$150.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/mw2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/mw2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html">T shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html"> Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html"> Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html"> Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html"> Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html"> Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 product-men yes-marg">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-front">
+						<img src="static/assets/images/g2.png" alt="" class="pro-image-back">
+							<div class="men-cart-pro">
+								<div class="inner-men-cart-pro">
+									<a href="single.html" class="link-product-add-cart">Quick View</a>
+								</div>
+							</div>
+							<span class="product-new-top">New</span>
+							
+					</div>
+					<div class="item-info-product ">
+						<h4><a href="single.html"> Shirts</a></h4>
+						<div class="info-product-price">
+							<span class="item_price">$45.99</span>
+							<del>$69.71</del>
+						</div>
+						<a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>									
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+{% endblock %}
