@@ -3,5 +3,5 @@ from store import views
 app_name='store'
 
 urlpatterns = [
-    path('',views.home,name='index'),
+    path('',views.ProductsList.as_view(),name='index'),
 ]
