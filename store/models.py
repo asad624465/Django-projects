@@ -40,5 +40,15 @@ class Product(models.Model):
         if not self.slug:
             self.slug=slugify(self.name)
         return super().save(*args, **kwrags)
+
+class ProductImage(models.Model):
+    product=models.ForeignKey(Product, on_delete=models.CASCADE)
+    image=models.ImageField(upload_to='product_gellary')
+    createdate=models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.product.name)
+
+
     
 

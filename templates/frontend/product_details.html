@@ -26,15 +26,11 @@
 						<li data-thumb="{{item.images.url}}">
 							<div class="thumb-image"> <img src="{{item.images.url}}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{{item.images.url}}">
-							<div class="thumb-image"> <img src="{{item.images.url}}" data-imagezoom="true" class="img-responsive"> </div>
-						</li>	
-						<li data-thumb="{{item.images.url}}">
-							<div class="thumb-image"> <img src="{{item.images.url}}" data-imagezoom="true" class="img-responsive"> </div>
-						</li>
-						<li data-thumb="{{item.images.url}}">
-							<div class="thumb-image"> <img src="{{item.images.url}}" data-imagezoom="true" class="img-responsive"> </div>
-						</li>	
+						{% for p_image in product_images %}
+							<li data-thumb="{{p_image.image.url}}">
+								<div class="thumb-image"> <img src="{{p_image.image.url}}" data-imagezoom="true" class="img-responsive"> </div>
+							</li>	
+						{% endfor %}
 					</ul>
 					<div class="clearfix"></div>
 				</div>	
