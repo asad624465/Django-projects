@@ -83,7 +83,7 @@
 						<div class="clearfix"> </div>
 					</div>
 					<div class="occasion-cart">
-						<a href="#" class="item_add hvr-outline-out button2">Add to cart</a>
+						<a href="{% url 'order:add-to-cart' pk=item.pk %}" class="item_add hvr-outline-out button2">Add to cart</a>
 					</div>
 					
 		</div>
