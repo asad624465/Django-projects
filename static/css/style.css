@@ -2509,7 +2509,7 @@ background:#FDA30E;
 .description input[type="submit"]:hover{
 	background:#000;
 }
-.occasion-cart a{
+.occasion-cart button{
 	padding:8px 15px;
 	text-decoration:none;
 	color:#fff;
@@ -3469,7 +3469,7 @@ td.invert-image a img {
 		float: left;
 		width: 67%;
 	}
-	.occasion-cart a {
+	.occasion-cart button {
 		padding: 5px 11px;
 		font-size: 14px;
 	}

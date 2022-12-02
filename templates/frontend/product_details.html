@@ -37,58 +37,74 @@
 			</div>
 		</div>
 		<div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
-					<h3>{{item.name}}</h3>
-					<p><span class="item_price">Tk. {{item.price}}</span> {% if item.old_price %}<del>- {{item.old_price}}</del>{% endif %}</p>
-					<div class="rating1">
-						<span class="starRating">
-							<input id="rating5" type="radio" name="rating" value="5">
-							<label for="rating5">5</label>
-							<input id="rating4" type="radio" name="rating" value="4">
-							<label for="rating4">4</label>
-							<input id="rating3" type="radio" name="rating" value="3" checked="">
-							<label for="rating3">3</label>
-							<input id="rating2" type="radio" name="rating" value="2">
-							<label for="rating2">2</label>
-							<input id="rating1" type="radio" name="rating" value="1">
-							<label for="rating1">1</label>
-						</span>
+			<form method="post" action="{% url 'order:add-to-cart' pk=item.pk %}">
+				{% csrf_token %}
+				<h3>{{item.name}}</h3>
+				<p><span class="item_price">Tk. {{item.price}}</span> {% if item.old_price %}<del>- {{item.old_price}}</del>{% endif %}</p>
+				<div class="rating1">
+					<span class="starRating">
+						<input id="rating5" type="radio" name="rating" value="5">
+						<label for="rating5">5</label>
+						<input id="rating4" type="radio" name="rating" value="4">
+						<label for="rating4">4</label>
+						<input id="rating3" type="radio" name="rating" value="3" checked="">
+						<label for="rating3">3</label>
+						<input id="rating2" type="radio" name="rating" value="2">
+						<label for="rating2">2</label>
+						<input id="rating1" type="radio" name="rating" value="1">
+						<label for="rating1">1</label>
+					</span>
+				</div>
+				<!--<div class="description">
+					<h5>Check delivery, payment options and charges at your location</h5>
+					<input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
+					<input type="submit" value="Check">
+				</div>-->
+				<div class="color-quality">
+					<div class="color-quality-right">
+						<h5>Quality :</h5>
+						<select id="country1" onchange="change_country(this.value)" name="qty" class="frm-field required sect">
+							<option value="1">01 Qty</option>
+							<option value="2">02 Qty</option> 
+							<option value="3">03 Qty</option>					
+							<option value="4">04 Qty</option>								
+							<option value="5">05 Qty</option>								
+							<option value="6">06 Qty</option>								
+							<option value="7">07 Qty</option>								
+							<option value="8">08 Qty</option>								
+							<option value="9">09 Qty</option>								
+							<option value="10">10 Qty</option>								
+						</select>
 					</div>
-					<div class="description">
-						<h5>Check delivery, payment options and charges at your location</h5>
-						<input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
-						<input type="submit" value="Check">
+				</div>
+				{% if item.variationvalue_set.sizes %}
+				<div class="occasional">
+					<h5>Sizes :</h5>
+					{% for sizes in  item.variationvalue_set.sizes %}
+					<div class="colr ert">
+						<label class="radio" id="{{ sizes.name }}"><input type="radio" id="{{ sizes.name }}" value="{{ sizes.name }}" name="size" ><i></i>{{ sizes.name }}</label>
 					</div>
-					<div class="color-quality">
-						<div class="color-quality-right">
-							<h5>Quality :</h5>
-							<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-								<option value="null">5 Qty</option>
-								<option value="null">6 Qty</option> 
-								<option value="null">7 Qty</option>					
-								<option value="null">10 Qty</option>								
-							</select>
-						</div>
+					{% endfor %}
+					<div class="clearfix"> </div>
+				</div>
+				{% endif %}
+				{% if item.variationvalue_set.colors %}
+				<div class="occasional">
+					<h5>Colors :</h5>
+					{% for colors in  item.variationvalue_set.colors %}
+					<div class="colr ert">
+						<label class="radio"><input type="radio" id="{{ colors.name }}" value="{{ colors.name }}" name="color"><i></i>{{ colors.name }}</label>
 					</div>
-					<div class="occasional">
-						<h5>Types :</h5>
-						<div class="colr ert">
-							<label class="radio"><input type="radio" name="radio" checked=""><i></i>Casual Shoes</label>
-						</div>
-						<div class="colr">
-							<label class="radio"><input type="radio" name="radio"><i></i>Sports Shoes</label>
-						</div>
-						<div class="colr">
-							<label class="radio"><input type="radio" name="radio"><i></i>Formal Shoes</label>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="occasion-cart">
-						<a href="{% url 'order:add-to-cart' pk=item.pk %}" class="item_add hvr-outline-out button2">Add to cart</a>
-					</div>
-					
+					{% endfor %}
+					<div class="clearfix"> </div>
+				</div>
+				{% endif %}
+				<div class="occasion-cart">
+					<button type="submit" class="item_add hvr-outline-out button2">Add to cart</button>
+				</div>
+			</form>		
 		</div>
 				<div class="clearfix"> </div>
-
 				<div class="bootstrap-tab animated wow slideInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInUp;">
 					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 						<ul id="myTab" class="nav nav-tabs" role="tablist">
