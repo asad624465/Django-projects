@@ -36,3 +36,14 @@ def addToCart(request, pk):
         order.save()
         order.orderitems.add(order_item[0])
         return redirect('store:index')
+
+def cartView(request):
+    carts = Cart.objects.filter(user=request.user,purchased = False)
+    orders = Order.objects.filter(user=request.user, ordered = False)
+    if carts.exists() and orders.exists():
+        context={
+            'carts':carts,
+            'orders':orders[0],
+        }
+        return render(request,'frontend/cart_view.html',context);
+        
