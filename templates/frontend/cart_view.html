@@ -29,7 +29,9 @@
 					<tr class="rem{{ forloop.counter }}">
 						<td class="invert-closeb">
 							<div class="rem">
-								<div class="close{{ forloop.counter }}"> </div>
+								<a href="{% url 'order:remove-item' pk=cart.item.pk %}">
+									<div class="close{{ forloop.counter }}"></div>
+								</a>
 							</div>
 							<script>$(document).ready(function(c) {
 								$('.close{{ forloop.counter }}').on('click', function(c){
@@ -44,9 +46,13 @@
 						<td class="invert">
 							 <div class="quantity"> 
 								<div class="quantity-select">                           
-									<div class="entry value-minus">&nbsp;</div>
+									<a href="{% url 'order:decrease-item' pk=cart.item.pk %}">
+										<div class="entry value-minus">&nbsp;</div>
+									</a>
 									<div class="entry value"><span>{{cart.quantity}}</span></div>
-									<div class="entry value-plus active">&nbsp;</div>
+									<a href="{% url 'order:increase-item' pk=cart.item.pk %}">
+										<div class="entry value-plus active">&nbsp;</div>
+									</a>
 								</div>
 							</div>
 						</td>
@@ -75,7 +81,7 @@
 		<div class="checkout-left">	
 				
 				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-					<a href="mens.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Shopping</a>
+					<a href="{% url 'order:cart' %}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Shopping</a>
 				</div>
 				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
 					<h4>Shopping basket</h4>

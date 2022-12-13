@@ -46,4 +46,60 @@ def cartView(request):
             'orders':orders[0],
         }
         return render(request,'frontend/cart_view.html',context);
+    else:
+       return render(request,'frontend/cart_view.html',{}); 
         
+def removeItemFromCart(request, pk):
+    item=get_object_or_404(Product, pk=pk)
+    orders = Order.objects.filter(user=request.user,ordered=False)
+    if orders.exists():
+        order=orders[0]
+        if order.orderitems.filter(item=item).exists():
+            order_item=Cart.objects.filter(user=request.user, item=item, purchased=False)[0]
+            order.orderitems.remove(order_item)
+            order_item.delete()
+            return redirect('order:cart')
+        else:
+            return redirect('order:cart')
+    else:
+        return redirect('order:cart')
+
+def increaseItemOfCart(request,pk):
+    item=get_object_or_404(Product,pk=pk)
+    orders = Order.objects.filter(user=request.user, ordered=False)
+    if orders.exists():
+        order=orders[0]
+        if order.orderitems.filter(item=item).exists():
+            order_item=Cart.objects.filter(user=request.user,item=item,purchased=False)[0]
+            if order_item.quantity >=1:
+                order_item.quantity +=1
+                order_item.save()
+                return redirect('order:cart')
+            else:
+             return redirect('order:cart')   
+        else:
+            return redirect('store:index')
+    else:
+        return redirect('store:index')
+
+def decreaseItemOfCart(request,pk):
+    item=get_object_or_404(Product,pk=pk)
+    orders=Order.objects.filter(user=request.user,ordered=False)
+    if orders.exists():
+        order=orders[0]
+        if order.orderitems.filter(item=item).exists():
+            order_item=Cart.objects.filter(item=item,user=request.user,purchased=False)[0]
+            if order_item.quantity > 1:
+               order_item.quantity -=1;
+               order_item.save()
+               return redirect('order:cart') 
+            else:
+                order.orderitems.remove(order_item)
+                order_item.delete()
+                return redirect('store:index')  
+        else:
+            return redirect('store:index')
+    else:
+        return redirect('store:index');
+            
+    
