@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.forms import IntegerField
 
-from store.models import Product
+from store.models import Product, VariationValue
 
 class Cart(models.Model):
     user = models.ForeignKey(User, related_name='cart', on_delete=models.CASCADE)
@@ -23,6 +23,44 @@ class Cart(models.Model):
         float_total= format(total,'0.2f')
         return float_total
 
+    def variationPriceOfSingleProduct(self):
+        sizes=VariationValue.objects.filter(variation='size',product=self.item)
+        colors=VariationValue.objects.filter(variation='color',product=self.item)
+        for size in sizes:
+            if colors.exists():
+                for color in colors:
+                    if color.name==self.color:
+                        color_price = color.price
+                if size.name==self.size:
+                    total=size.price + color_price
+                    net_total=total
+                    float_total=format(net_total,'0.2f')
+                    return float_total
+            else:
+                if size.name==self.size:
+                    total=size.price 
+                    float_total=format(total,'0.2f')
+                    return float_total
+    def variation_total(self):
+        sizes=VariationValue.objects.filter(variation='size',product=self.item)
+        colors=VariationValue.objects.filter(variation='color',product=self.item)
+        for size in sizes:
+            if colors.exists():
+                for color in colors:
+                    if color.name==self.color:
+                        color_price=color.price
+                        color_qt_price=color_price*self.quantity
+                if size.name == self.size:
+                    total = size.price*self.quantity
+                    net_total = total+color_qt_price
+                    float_total=format(net_total,'0.2f')
+                    return float_total
+            else:
+                if size.name==self.size:
+                    total= size.price*self.quantity
+                    float_total = format(total,'0.2f')
+                    return float_total
+
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     orderitems= models.ManyToManyField(Cart)
@@ -34,5 +72,10 @@ class Order(models.Model):
     def get_totals(self):
         total=0
         for order_item in self.orderitems.all():
-            total += float(order_item.get_total())
+            if order_item.variation_total():
+                total+= float(order_item.variation_total())
+            elif order_item.variationPriceOfSingleProduct():
+                total+= float(order_item.variationPriceOfSingleProduct())
+            else:
+                total += float(order_item.get_total())
         return total

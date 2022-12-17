@@ -59,8 +59,20 @@
 						<td class="invert">{{cart.item.name}}</td>
 						<td class="invert">{{cart.color}}</td>
 						<td class="invert">{{cart.size}}</td>
-						<td class="invert">Tk.{{cart.item.price}}</td>
-						<td class="invert">Tk.{{cart.get_total}}</td>
+						<td class="invert">Tk.
+							{% if cart.variationPriceOfSingleProduct %}
+								{{ cart.variationPriceOfSingleProduct }}
+							{% else %}
+								{{cart.item.price}}
+							{% endif %}
+						</td>
+						<td class="invert">Tk.
+						{% if cart.variation_total %}
+							{{ cart.variation_total }}
+						{% else %}
+							{{cart.get_total}}
+						{% endif %}
+						</td>
 					</tr>
 					{% endfor %}
 					<!--quantity-->
