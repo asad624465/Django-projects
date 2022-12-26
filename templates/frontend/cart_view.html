@@ -93,15 +93,35 @@
 		<div class="checkout-left">	
 				
 				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+					<div class="col-lg-3 in-gp-tb">
+						<form method="POST" action="">
+							{% csrf_token %}
+							<div class="input-group" style="margin-top:-10px" >
+							<input type="text" class="form-control" placeholder="Coupon Code.." name="code" style="height:40px">
+							<span class="input-group-btn">
+								<button class="btn btn-warning glyphicon glyphicon glyphicon-arrow-right" type="submit" style="height:40px;border-radius:none"></button>
+							</span>
+							</div>
+						</form>
+					</div>
 					<a href="{% url 'order:cart' %}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Shopping</a>
 				</div>
-				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+				
+				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s" style="margin-top:-185px">
 					<h4>Shopping basket</h4>
 					<ul>
 						<li>Subtotal <i>-</i> <span>Tk.{{orders.get_totals}}</span></li>
 						<li>Shipping <i>-</i> <span>Tk.150</span></li>
 						<li>Order Charge <i>-</i> <span>tk.20</span></li>
-						<li>Total <i>-</i> <span>{{orders.get_totals}}</span></li>
+						<li>Total <i>-</i> <span>Tk.
+							{% if discount_amount %}
+								{{discount_amount}}
+							{% else %}
+								{{orders.get_totals}}
+							{% endif %}
+							
+							
+						</span></li>
 					</ul>
 				</div>
 				<div class="clearfix"> </div>

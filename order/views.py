@@ -4,6 +4,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from store.models import Product
 from order.models import Cart, Order
 
+from coupon.forms import CouponCodeForm
+from coupon.models import Coupon
+from django.utils import timezone
+
 def addToCart(request, pk):
     item = get_object_or_404(Product, pk=pk)
     order_item=Cart.objects.get_or_create(item=item,user=request.user, purchased=False)
@@ -40,10 +44,32 @@ def addToCart(request, pk):
 def cartView(request):
     carts = Cart.objects.filter(user=request.user,purchased = False)
     orders = Order.objects.filter(user=request.user, ordered = False)
+    print(orders.exists())
     if carts.exists() and orders.exists():
+        order = orders[0]
+        coupon_form=CouponCodeForm(request.POST)
+        if coupon_form.is_valid():
+            current_time=timezone.now().date()
+            code=coupon_form.cleaned_data.get('code')
+            try:
+                coupon_obj=Coupon.objects.get(code=code)
+                if coupon_obj.valid_to >= current_time and coupon_obj.active_status==True:
+                    get_discount=(coupon_obj.discount/100)*order.get_totals()
+                    total_price_after_discount=order.get_totals()-get_discount
+                    request.session['discount_amount']=total_price_after_discount
+                    request.session['coupon_code']=code
+                    return redirect('order:cart')
+            except Coupon.DoesNotExist:
+                coupon_obj = None
+
+        total_price_after_discount=request.session.get('discount_amount')
+        code=request.session.get('coupon_code')
         context={
             'carts':carts,
             'orders':orders[0],
+            'coupon_form':coupon_form,
+            'discount_amount':total_price_after_discount,
+            'coupon_code':code,
         }
         return render(request,'frontend/cart_view.html',context);
     else:

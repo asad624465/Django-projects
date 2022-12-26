@@ -28,6 +28,7 @@ class Cart(models.Model):
         colors=VariationValue.objects.filter(variation='color',product=self.item)
         for size in sizes:
             if colors.exists():
+                color_price=0
                 for color in colors:
                     if color.name==self.color:
                         color_price = color.price
@@ -46,6 +47,7 @@ class Cart(models.Model):
         colors=VariationValue.objects.filter(variation='color',product=self.item)
         for size in sizes:
             if colors.exists():
+                color_qt_price=0
                 for color in colors:
                     if color.name==self.color:
                         color_price=color.price
