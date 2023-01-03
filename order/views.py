@@ -44,7 +44,6 @@ def addToCart(request, pk):
 def cartView(request):
     carts = Cart.objects.filter(user=request.user,purchased = False)
     orders = Order.objects.filter(user=request.user, ordered = False)
-    print(orders.exists())
     if carts.exists() and orders.exists():
         order = orders[0]
         coupon_form=CouponCodeForm(request.POST)
@@ -56,19 +55,23 @@ def cartView(request):
                 if coupon_obj.valid_to >= current_time and coupon_obj.active_status==True:
                     get_discount=(coupon_obj.discount/100)*order.get_totals()
                     total_price_after_discount=order.get_totals()-get_discount
-                    request.session['discount_amount']=total_price_after_discount
+                    request.session['discount_amount']=get_discount
+                    request.session['total_price_after_discount']=total_price_after_discount
                     request.session['coupon_code']=code
                     return redirect('order:cart')
             except Coupon.DoesNotExist:
                 coupon_obj = None
-
-        total_price_after_discount=request.session.get('discount_amount')
+        request.session['discount_amount']=1700
+        request.session['total_price_after_discount']=15300
+        total_price_after_discount=request.session.get('total_price_after_discount')
         code=request.session.get('coupon_code')
+        discount_amount=request.session.get('discount_amount')
         context={
             'carts':carts,
             'orders':orders[0],
             'coupon_form':coupon_form,
-            'discount_amount':total_price_after_discount,
+            'total_price_after_discount':total_price_after_discount,
+            'discount_amount':discount_amount,
             'coupon_code':code,
         }
         return render(request,'frontend/cart_view.html',context);

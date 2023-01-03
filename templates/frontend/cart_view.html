@@ -2,7 +2,7 @@
 {% block main_cotents %}
 <div class="page-head">
 	<div class="container">
-		<h3>Check Out</h3>
+		<h3 style="color:#fff">Check Out</h3>
 	</div>
 </div>
 <!-- //banner -->
@@ -93,6 +93,7 @@
 		<div class="checkout-left">	
 				
 				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+					
 					<div class="col-lg-3 in-gp-tb">
 						<form method="POST" action="">
 							{% csrf_token %}
@@ -111,18 +112,22 @@
 					<h4>Shopping basket</h4>
 					<ul>
 						<li>Subtotal <i>-</i> <span>Tk.{{orders.get_totals}}</span></li>
-						<li>Shipping <i>-</i> <span>Tk.150</span></li>
-						<li>Order Charge <i>-</i> <span>tk.20</span></li>
+						<li>Discount<i>-</i> 
+							<span>tk.
+								{% if discount_amount %}
+									{{discount_amount}}
+								{% endif %}
+							</span>
+						</li>
 						<li>Total <i>-</i> <span>Tk.
-							{% if discount_amount %}
-								{{discount_amount}}
+							{% if total_price_after_discount %}
+								{{total_price_after_discount}}
 							{% else %}
 								{{orders.get_totals}}
 							{% endif %}
-							
-							
 						</span></li>
 					</ul>
+					<a href="{% url 'payment:checkout' %}" class="btn btn-primary pull-right" style="margin:10px;">Back To Shopping <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
