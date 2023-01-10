@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block main_cotents %}
+<div class="page-head">
+	<div class="container">
+		<h3 style="color:#fff">Place Order</h3>
+	</div>
+</div>
+<!-- //banner -->
+<!-- check out -->
+<div class="checkout">
+	<div class="container">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card" style="margin-bottom:50px">
+                        <div class="card-body">
+                            <div style="padding:10px;">
+                                
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">First Name</label>
+                                    <input type="text" class="form-control" value="{{billling_addresss.first_name.value}}" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Last Name</label>
+                                    <input type="text" class="form-control" value="{{billling_addresss.last_name.value}}" name="last_name" id="exampleInputPassword1" placeholder="Last Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Country</label>
+                                    <input type="text" class="form-control" value="{{billling_addresss.country.value}}" id="exampleInputEmail1" name="country" aria-describedby="emailHelp" placeholder="Country Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Address 1</label>
+                                    <textarea type="text" name="address_one" class="form-control" id="exampleInputPassword1" placeholder="Address 1" required>{{billling_addresss.address_one.value}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Address 2</label>
+                                    <textarea type="text" name="address_two" class="form-control" id="exampleInputPassword1" placeholder="Address 2" required>{{billling_addresss.address_two.value}}</textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                      <label for="inputCity">City</label>
+                                      <input type="text" class="form-control" value="{{billling_addresss.city.value}}" name="city" id="inputCity" placeholder="City" required>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                      <label for="inputState">Phone Number</label>
+                                      <input type="text" class="form-control" value="{{billling_addresss.phone_number.value}}" name="phone_number" id="inputZip" placeholder="Phone Number" required>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                      <label for="inputZip">Zip</label>
+                                      <input type="text" class="form-control" value="{{billling_addresss.zipcode.value}}" name="zipcode" id="inputZip" placeholder="Zip" required>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="checkout-left-basket animated wow slideInLeft" style="width:100%" data-wow-delay=".5s" >
+                        <h4>Your Order</h4>
+                        <ul>
+                            <li style="border-bottom: 1px solid #ccc;">Product <i>-</i> <span>Amount</span></li>
+                            {% for cart in order_items  %}
+                                <li><a href="#">{{cart.item.name}}</a><i>-</i> <span>Tk.
+                                    {% if cart.variation_total %}
+                                    {{ cart.variation_total }}
+                                    {% else %}
+                                        {{cart.get_total}}
+                                    {% endif %}</span>
+                                </li>
+                            {% endfor %}
+                            <li>Subtotal <i>-</i> <span>Tk.{{total_amount}}</span></li>
+                            <li style="border-bottom: 1px solid #ccc;">Discount <i>-</i> <span>
+                                Tk.
+                                {% if request.session.discount_amount %}
+                                    {{ request.session.discount_amount }}
+                                {% endif %}
+                            </span></li>
+                            <li>Total <i>-</i> <span>Tk.
+                                {% if request.session.total_price_after_discount %}
+								    {{request.session.total_price_after_discount}}
+                                {% else %}
+                                    {{orders.get_totals}}
+                                {% endif %}
+                            </span></li>
+                            {{payment_method.as_p}}
+                        </ul>
+                        
+                        <button type="submit" class="btn btn-primary pull-right" style="margin:10px;">Place Order<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        </form
+    </div>
+		
+</div>
+{% endblock %}
+{% block paypal %}
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+{% endblock paypal %}
+
