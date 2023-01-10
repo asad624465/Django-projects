@@ -124,6 +124,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [STATIC_DIR]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+STORE_ID='neelg63b475f26d8b9'
+STORE_PASS='neelg63b475f26d8b9@ssl'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
