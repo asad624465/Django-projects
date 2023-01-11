@@ -70,5 +70,14 @@ class VariationValue(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+class Banner(models.Model):
+    product=models.ForeignKey(Product, related_name='banner', on_delete=models.CASCADE)
+    baner_long_image=models.ImageField(upload_to='banner_long')
+    baner_short_image=models.ImageField(upload_to='banner_short')
+    baner_title=models.CharField(verbose_name="Banner Title", max_length=100)
+    is_active=models.BooleanField(default=False)
+    created=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.product.name
 
