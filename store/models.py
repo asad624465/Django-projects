@@ -2,6 +2,7 @@ from django.db import models
 
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 class Category(models.Model):
     name=models.CharField(max_length=50,blank=False,null=False)
@@ -80,4 +81,27 @@ class Banner(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.product.name
+
+class OurProjectInfo(models.Model):
+    User=get_user_model();
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=50,verbose_name="Company Name")
+    company_address = models.CharField(max_length=250,verbose_name="Company address")
+    about_company = models.CharField(max_length=250,verbose_name="About Company")
+    email_adddress = models.CharField(max_length=50,verbose_name="Email adddress")
+    contract_number = models.CharField(max_length=15,verbose_name="Contract Number")
+    facebook = models.CharField(max_length=250,verbose_name="Facebook")
+    twitter = models.CharField(max_length=250,verbose_name="Twitter")
+    youtube = models.CharField(max_length=250,verbose_name="Youtube")
+    linkedin = models.CharField(max_length=250,verbose_name="Linkedin")
+    company_logo=models.ImageField(upload_to='logo')
+    fabi_icon=models.ImageField(upload_to='fabi_icon')
+    is_active=models.BooleanField(default=False)
+    created=models.DateTimeField(auto_now_add=True)
+
+    #def __str__(self):
+        #return self.company_address
+    
+        
+        
 

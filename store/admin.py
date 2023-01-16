@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from store.models import Category,Product,ProductImage,VariationValue,Banner
+from store.models import Category,Product,ProductImage,VariationValue,Banner,OurProjectInfo
 
 class ProductImageAdmin(admin.StackedInline):
     model = ProductImage
@@ -13,3 +13,4 @@ admin.site.register(Category)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(VariationValue)
 admin.site.register(Banner)
+admin.site.register(OurProjectInfo)
