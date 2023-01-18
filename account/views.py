@@ -4,6 +4,10 @@ from account.forms import RegistrationForm
 #authentication info
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
+from order.models import Cart,Order
+from payment.models import BillingAddress
+from account.models import Profile
+from django.views.generic import TemplateView
 def register(req):
     if req.user.is_authenticated:
         return HttpResponse('you are already authenticate user')
@@ -32,3 +36,14 @@ def Customerlogin(req):
             else:
                 return HttpResponse('404')
     return render (req,'backend/login.html')
+
+class profileViews(TemplateView):
+    def get(self,request,*args, **kwargs):
+        orders=Order.objects.filter(user=request.user,ordered=True)
+        context={
+            'orders':orders
+        }
+        return render (request,'frontend/profile.html',context)
+
+    def post(self,request,*args, **kwargs):
+        pass
