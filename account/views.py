@@ -40,8 +40,10 @@ def Customerlogin(req):
 class profileViews(TemplateView):
     def get(self,request,*args, **kwargs):
         orders=Order.objects.filter(user=request.user,ordered=True)
+        billingAddress=BillingAddress.objects.filter(user=request.user)
         context={
-            'orders':orders
+            'orders':orders,
+            'billingAddress':billingAddress,
         }
         return render (request,'frontend/profile.html',context)
 
