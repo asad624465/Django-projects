@@ -107,45 +107,50 @@
             <div class="row">
                 <!-- Left Section -->
                 <div class="col-sm-9 col-md-9 col-lg-9">
-                    <div class="my-account">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-responsive table-bordered text-left my-orders-table">
-                                <thead>
-                                    <tr class="first last">
-                                        <th>#</th>
-                                        <th>Products</th>
-                                        <th>Payment Id</th>
-                                        <th>Order Id</th>
-                                        <th>Date</th>
-                                       <!-- <th class="text-center">Actions</th>-->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if orders %}
-                                        {% for order in orders %}
-                                        <tr>
-                                            <td>{{order.id}}</td>
-                                            <td>
-                                                {% for product in order.orderitems.all %}
-                                                    <span>{{product}}</span>
-                                                {% endfor %}
-                                            </td>
-                                            <td>{{order.paymentId}}</td>
-                                            <td><span class="price">{{order.orderId}}</td>
-                                            <td class="text-primary">{{order.created}}</td>
-                                           <!-- <td class="text-center last">
-                                                <div class="btn-group">
-                                                    <a href="#" class="btn btn-color">View Order</a>
-                                                    <a href="#" class="btn btn-default">Reorder</a>
-                                                </div>
-                                            </td>-->
-                                        </tr>
-                                        {% endfor %}
-                                    {% endif %}
-                                </tbody>
-                            </table>
+                    <form method="POST" action="">
+                        {% csrf_token %} 
+                        <div class="my-account">
+                            <div class="card-body">
+                                <div style="padding:10px;">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">First Name</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.first_name.value}}" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp" placeholder="First Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Last Name</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.last_name.value}}" name="last_name" id="exampleInputPassword1" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Country</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.country.value}}" id="exampleInputEmail1" name="country" aria-describedby="emailHelp" placeholder="Country Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Address 1</label>
+                                        <textarea type="text" name="address_one" class="form-control" id="exampleInputPassword1" placeholder="Address 1" required>{{billling_addresss.address_one.value}}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Address 2</label>
+                                        <textarea type="text" name="address_two" class="form-control" id="exampleInputPassword1" placeholder="Address 2" required>{{billling_addresss.address_two.value}}</textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-5">
+                                        <label for="inputCity">City</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.city.value}}" name="city" id="inputCity" placeholder="City" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        <label for="inputState">Phone Number</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.phone_number.value}}" name="phone_number" id="inputZip" placeholder="Phone Number" required>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                        <label for="inputZip">Zip</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.zipcode.value}}" name="zipcode" id="inputZip" placeholder="Zip" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg pull-right" style="margin:10px;">Update Account Info</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <!-- /Left Section -->
                 <!-- Sidebar -->
@@ -158,17 +163,17 @@
                                 <li>
                                     <a href="my-account.html"><i class="fa fa-gears item-icon"></i>My Dashboard</a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="{% url 'account:my-account-information' %}"><i class="fa fa-user item-icon"></i>Account Information</a>
                                 </li>
                                 <li>
                                     <a href="my-address.html"><i class="fa fa-pencil-square-o item-icon"></i>Address Book</a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="{% url 'account:profile' %}"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>
                                 </li>
                             </ul>
-                            {{billingAddress}}
+                            
                         </div>
                         <!-- /menu-->
                     </div>

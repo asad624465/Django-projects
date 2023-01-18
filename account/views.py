@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from  django.http import HttpResponse 
 from account.forms import RegistrationForm 
 #authentication info
@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
 from order.models import Cart,Order
 from payment.models import BillingAddress
+from payment.forms import BillingAddressForm
 from account.models import Profile
 from django.views.generic import TemplateView
 def register(req):
@@ -40,12 +41,27 @@ def Customerlogin(req):
 class profileViews(TemplateView):
     def get(self,request,*args, **kwargs):
         orders=Order.objects.filter(user=request.user,ordered=True)
-        billingAddress=BillingAddress.objects.filter(user=request.user)
         context={
             'orders':orders,
-            'billingAddress':billingAddress,
         }
         return render (request,'frontend/profile.html',context)
 
     def post(self,request,*args, **kwargs):
         pass
+class myAccountInfo(TemplateView):
+    def get(self,request,*args, **kwargs):
+        billingAddress=BillingAddress.objects.get(user=request.user)
+        billingAddress_form=BillingAddressForm(instance=billingAddress)
+        context={
+            'billling_addresss':billingAddress_form,
+        }
+        return render (request,'frontend/myAccountInfo.html',context)
+
+    def post(self,request,*args, **kwargs):
+        if request.method=='POST' or request.method=='post':
+            billingAddress=BillingAddress.objects.get(user=request.user)
+            billingAddress_form=BillingAddressForm(request.POST,instance=billingAddress)
+            if billingAddress_form.is_valid():
+                billingAddress_form.save()
+                return redirect('account:my-account-information')
+            
