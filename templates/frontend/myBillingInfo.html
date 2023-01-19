@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block title %}Product Details{% endblock title %}
+{% block main_cotents %}
+<style>
+    .margin-top60 {
+        margin-top: 60px;
+    }
+    .pattern-overlay {
+        background-color: rgba(89, 171, 2, 0.75);
+    }
+    h2.title {
+        font-size: 26px;
+        line-height: 40px;
+        margin: 20px 0;
+        color: #fff;
+    }
+    .breadcrumbs {
+        margin: 24px 0;
+        color: #fff;
+    }
+    .breadcrumbs ul {
+        padding-left: 0;
+    }
+    .breadcrumbs ul, .portfolio-single .sidebar h3 {
+        margin-top: 5px;
+    }
+    .breadcrumbs ul li {
+        display: inline-block;
+        line-height: 24px;
+        font-size: 15px;
+        color: #9e9e9e;
+        margin: 0 0 0 5px;
+        color: #fff;
+    }
+    .breadcrumbs ul li:before {
+        color: #fff;
+        content: ">";
+        font-family: FontAwesome;
+        font-size: 12px;
+        margin: 0 9px 0 0;
+    }
+    .sidebar .widget, .widget {
+        margin-bottom: 35px;
+    }
+    .widget ul {
+        list-style: none;
+        padding: 0;
+    }
+    .sidebar-nav li {
+        padding: 10px;
+        background-color: #fafafa;
+        width: 100%;
+        margin-bottom: 5px;
+        color: #000;
+    }
+    h3 {
+        color: #283043;
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 700;
+        letter-spacing: normal;
+        margin-bottom: 24px;
+    }
+    #sidebar h3 {
+        padding-top: 7px;
+    }
+    .pricing_plan h3, .pricing_plan.special h3, .sidebar-nav li.active, .sidebar-nav li:hover, .btn.btn-shopping-cart .fa {
+        background-color: #59ab02;
+        color:#fff
+    }
+    .sidebar-nav li.active {
+        padding: 10px;
+        width: 100%;
+        margin-bottom: 5px;
+        color: #ffffff !important;
+    }
+    .table-responsive {
+        min-height: .01%;
+        overflow-x: auto;
+    }
+</style>
+<section id="main">
+    <div class="breadcrumb-wrapper">
+        <div class="pattern-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                        <h2 class="title">My Orders</h2>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                        <div class="breadcrumbs pull-right">
+                            <ul>
+                                <li>You are Now on:</li>
+                                <li><a href="index-2.html">Home</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li>My Orders</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <div class="content margin-top60 margin-bottom60">
+        <div class="container">
+            <div class="row">
+                <!-- Left Section -->
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <form method="POST" action="">
+                        {% csrf_token %} 
+                        <div class="my-account">
+                            <div class="card-body">
+                                <div style="padding:10px;">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">First Name</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.first_name.value}}" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp" placeholder="First Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Last Name</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.last_name.value}}" name="last_name" id="exampleInputPassword1" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Country</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.country.value}}" id="exampleInputEmail1" name="country" aria-describedby="emailHelp" placeholder="Country Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Address 1</label>
+                                        <textarea type="text" name="address_one" class="form-control" id="exampleInputPassword1" placeholder="Address 1" required>{{billling_addresss.address_one.value}}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Address 2</label>
+                                        <textarea type="text" name="address_two" class="form-control" id="exampleInputPassword1" placeholder="Address 2" required>{{billling_addresss.address_two.value}}</textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-5">
+                                        <label for="inputCity">City</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.city.value}}" name="city" id="inputCity" placeholder="City" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        <label for="inputState">Phone Number</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.phone_number.value}}" name="phone_number" id="inputZip" placeholder="Phone Number" required>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                        <label for="inputZip">Zip</label>
+                                        <input type="text" class="form-control" value="{{billling_addresss.zipcode.value}}" name="zipcode" id="inputZip" placeholder="Zip" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg pull-right" style="margin:10px;">Update Account Info</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /Left Section -->
+                <!-- Sidebar -->
+                <div id="sidebar" class="sidebar col-sm-3 col-md-3 col-lg-3">
+                    <div class="widget">
+                        <h3>My Account</h3>
+                        <!-- Menu -->
+                        <div id="sidebar-nav">
+                            <ul class="sidebar-nav">
+                                <li>
+                                    <a href="my-account.html"><i class="fa fa-gears item-icon"></i>My Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'account:my-account-information' %}"><i class="fa fa-user item-icon"></i>Account Information</a>
+                                </li>
+                                <li class="active">
+                                    <a style="color:#fff" href="{% url 'account:my-billing-information' %}"><i class="fa fa-pencil-square-o item-icon"></i>Billing Information</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'account:profile' %}"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        <!-- /menu-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+{% endblock %}
