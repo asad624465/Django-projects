@@ -113,37 +113,34 @@
                             <div class="card-body">
                                 <div style="padding:10px;">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">First Name</label>
-                                        <input type="text" class="form-control" value="{{billling_addresss.first_name.value}}" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp" placeholder="First Name" required>
+                                        <label for="exampleInputEmail1">Full name</label>
+                                        <input type="text" class="form-control" value="{{account_info.full_name.value}}" id="exampleInputEmail1" name="full_name" aria-describedby="emailHelp" placeholder="First Name" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Last Name</label>
-                                        <input type="text" class="form-control" value="{{billling_addresss.last_name.value}}" name="last_name" id="exampleInputPassword1" placeholder="Last Name" required>
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Country</label>
-                                        <input type="text" class="form-control" value="{{billling_addresss.country.value}}" id="exampleInputEmail1" name="country" aria-describedby="emailHelp" placeholder="Country Name" required>
+                                        <input type="text" class="form-control" value="{{account_info.country.value}}" id="exampleInputEmail1" name="country" aria-describedby="emailHelp" placeholder="Country Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Address 1</label>
-                                        <textarea type="text" name="address_one" class="form-control" id="exampleInputPassword1" placeholder="Address 1" required>{{billling_addresss.address_one.value}}</textarea>
+                                        <label for="exampleInputPassword1">Address</label>
+                                        <textarea type="text" name="address" class="form-control" id="exampleInputPassword1" placeholder="Address" required>{{account_info.address.value}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Address 2</label>
-                                        <textarea type="text" name="address_two" class="form-control" id="exampleInputPassword1" placeholder="Address 2" required>{{billling_addresss.address_two.value}}</textarea>
+                                        <label for="exampleInputEmail1">Email Address</label>
+                                        <input type="text" class="form-control" value="{{account_info.email.value}}" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Country Name" required>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-5">
                                         <label for="inputCity">City</label>
-                                        <input type="text" class="form-control" value="{{billling_addresss.city.value}}" name="city" id="inputCity" placeholder="City" required>
+                                        <input type="text" class="form-control" value="{{account_info.city.value}}" name="city" id="inputCity" placeholder="City" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                         <label for="inputState">Phone Number</label>
-                                        <input type="text" class="form-control" value="{{billling_addresss.phone_number.value}}" name="phone_number" id="inputZip" placeholder="Phone Number" required>
+                                        <input type="text" class="form-control" value="{{account_info.phone.value}}" name="phone" id="inputZip" placeholder="Phone Number" required>
                                         </div>
                                         <div class="form-group col-md-3">
-                                        <label for="inputZip">Zip</label>
-                                        <input type="text" class="form-control" value="{{billling_addresss.zipcode.value}}" name="zipcode" id="inputZip" placeholder="Zip" required>
+                                        <label for="inputZip">Zip code</label>
+                                        <input type="text" class="form-control" value="{{account_info.zip_code.value}}" name="zip_code" id="inputZip" placeholder="Zip" required>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-lg pull-right" style="margin:10px;">Update Account Info</button>
@@ -164,10 +161,10 @@
                                     <a href="my-account.html"><i class="fa fa-gears item-icon"></i>My Dashboard</a>
                                 </li>
                                 <li class="active">
-                                    <a href="{% url 'account:my-account-information' %}"><i class="fa fa-user item-icon"></i>Account Information</a>
+                                    <a style="color:#fff" href="{% url 'account:my-account-information' %}"><i class="fa fa-user item-icon"></i>Account Information</a>
                                 </li>
                                 <li>
-                                    <a href="my-address.html"><i class="fa fa-pencil-square-o item-icon"></i>Address Book</a>
+                                    <a href="{% url 'account:my-billing-information' %}"><i class="fa fa-pencil-square-o item-icon"></i>Billing Information</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'account:profile' %}"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>

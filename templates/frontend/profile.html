@@ -162,10 +162,10 @@
                                     <a href="{% url 'account:my-account-information' %}"><i class="fa fa-user item-icon"></i>Account Information</a>
                                 </li>
                                 <li>
-                                    <a href="my-address.html"><i class="fa fa-pencil-square-o item-icon"></i>Address Book</a>
+                                    <a  href="{% url 'account:my-billing-information' %}"><i class="fa fa-pencil-square-o item-icon"></i>Billing Information</a>
                                 </li>
                                 <li class="active">
-                                    <a href="{% url 'account:profile' %}"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>
+                                    <a style="color:#fff" href="{% url 'account:profile' %}"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>
                                 </li>
                             </ul>
                             {{billingAddress}}

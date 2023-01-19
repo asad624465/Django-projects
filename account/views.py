@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from  django.http import HttpResponse 
-from account.forms import RegistrationForm 
+from account.forms import RegistrationForm,ProfileForm 
 #authentication info
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
@@ -50,12 +50,28 @@ class profileViews(TemplateView):
         pass
 class myAccountInfo(TemplateView):
     def get(self,request,*args, **kwargs):
+        accountAddress=Profile.objects.get(user=request.user)
+        accountAddress_form=ProfileForm(instance=accountAddress)
+        context={
+            'account_info':accountAddress_form,
+        }
+        return render (request,'frontend/myAccountInfo.html',context)
+
+    def post(self,request,*args, **kwargs):
+        if request.method=='POST' or request.method=='post':
+            accountAddress=Profile.objects.get(user=request.user)
+            accountAddress_form=ProfileForm(request.POST,instance=accountAddress)
+            if accountAddress_form.is_valid():
+                accountAddress_form.save()
+                return redirect('account:my-account-information')
+class myBillingInfo(TemplateView):
+    def get(self,request,*args, **kwargs):
         billingAddress=BillingAddress.objects.get(user=request.user)
         billingAddress_form=BillingAddressForm(instance=billingAddress)
         context={
             'billling_addresss':billingAddress_form,
         }
-        return render (request,'frontend/myAccountInfo.html',context)
+        return render (request,'frontend/myBillingInfo.html',context)
 
     def post(self,request,*args, **kwargs):
         if request.method=='POST' or request.method=='post':
@@ -63,5 +79,5 @@ class myAccountInfo(TemplateView):
             billingAddress_form=BillingAddressForm(request.POST,instance=billingAddress)
             if billingAddress_form.is_valid():
                 billingAddress_form.save()
-                return redirect('account:my-account-information')
+                return redirect('account:my-billing-information')
             
