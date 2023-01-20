@@ -47,8 +47,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
 		<ul>
 			<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Free and Fast Delivery</li>
-			<li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>{{ request.user|companyName  }}</li>
-			<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:{{request.user|companyEmail}}">{{request.user|companyEmail}}</a></li>
+			<li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>{{ request|companyName  }}</li>
+			<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:{{request|companyEmail}}">{{request|companyEmail}}</a></li>
 		</ul>
 	</div>
 </div>
@@ -59,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="col-md-3 header-left">
 			<h1>
 				
-				<a href="{% url 'store:index' %}"><img src="{{ request.user|companyLogo  }}"></a>
+				<a href="{% url 'store:index' %}"><img src="{{ request|companyLogo  }}"></a>
 			</h1>
 		</div>
 		<div class="col-md-6 header-middle">
@@ -89,10 +89,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a>
 					
 				</li>
-				<li><a class="fb" href="{{ request.user|facebook  }}"></a></li>
-				<li><a class="twi" href="{{ request.user|twitter  }}"></a></li>
-				<li><a class="insta" href="{{ request.user|linkedin  }}"></a></li>
-				<li><a class="you" href="{{ request.user|youtube  }}"></a></li>
+				<li><a class="fb" href="{{ request|facebook  }}"></a></li>
+				<li><a class="twi" href="{{ request|twitter  }}"></a></li>
+				<li><a class="insta" href="{{ request|linkedin  }}"></a></li>
+				<li><a class="you" href="{{ request|youtube  }}"></a></li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -140,9 +140,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					{% endif%}
 					{% endfor %}
 					
-					<!--<li class=" menu__item"><a class="menu__link" href="electronics.html">Electronics</a></li>
-					<li class=" menu__item"><a class="menu__link" href="codes.html">Short Codes</a></li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">contact</a></li>-->
 				  </ul>
 				</div>
 			  </div>
@@ -162,7 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						{% else %}
 						<h3> <div class="total">
 							<i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-							{{ request.user|cart_total}}({{ request.user|cart_count}} items)
+							0.00 (0 items)
 						</div>	
 						</h3>
 						<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
@@ -207,8 +204,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="footer">
 	<div class="container">
 		<div class="col-md-3 footer-left">
-			<h2><a href="index.html"><img src="{{request.user|companyLogo}}" alt=" " /></a></h2>
-			<p>{{request.user|aboutCompany}}.</p>
+			<h2><a href="{% url 'store:index' %}"><img src="{{request|companyLogo}}" alt=" " /></a></h2>
+			<p>{{request|aboutCompany}}.</p>
 		</div>
 		<div class="col-md-9 footer-right">
 			<div class="col-sm-6 newsleft">
@@ -237,9 +234,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-4 sign-gd-two">
 					<h4>Store Information</h4>
 					<ul>
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : {{request.user|companyAddress}}</span></li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="{{request.user|companyEmail}}">{{request.user|companyEmail}}</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : {{request.user|companyPhone}}</li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : {{request|companyAddress}}</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="{{request|companyEmail}}">{{request.user|companyEmail}}</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : {{request|companyPhone}}</li>
 					</ul>
 				</div>
 				<div class="col-md-4 sign-gd flickr-post">
