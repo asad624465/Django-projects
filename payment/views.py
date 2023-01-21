@@ -1,10 +1,10 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from account.models import Profile
-
+User=get_user_model()
 #import Models
 from payment.models import BillingAddress
 from payment.forms import BillingAddressForm,PaymentForms
