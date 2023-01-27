@@ -7,6 +7,7 @@ from order.models import Cart, Order
 from coupon.forms import CouponCodeForm
 from coupon.models import Coupon
 from django.utils import timezone
+from notification.notification import SentNotification
 
 def addToCart(request, pk):
     item = get_object_or_404(Product, pk=pk)
@@ -26,6 +27,8 @@ def addToCart(request, pk):
             order_item[0].color = color
             order_item[0].size = size
             order_item[0].save()
+            message=f"New order is placed"
+            SentNotification(request.user,message)
             return redirect('store:index')
         else:
             color=request.POST.get('color')
@@ -38,6 +41,8 @@ def addToCart(request, pk):
     else:
         order=Order(user=request.user)
         order.save()
+        message=f"Product Quantity updated"
+        SentNotification(request.user,message)
         order.orderitems.add(order_item[0])
         return redirect('store:index')
 

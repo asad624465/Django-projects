@@ -5,6 +5,7 @@
 {% load category %}
 {% load cart_product %}
 {% load companyInfo %}
+{% load notificationtags %}
 {% load static %}
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +18,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{% static 'assets/css/flexslider.css' %}" type="text/css" media="screen" />
 
-
+<style>
+.dropdown-menu div{
+	width:100%;
+	overflow:hidden;
+	padding:2px 10px;
+}
+</style>
 
 <!-- //pignose css -->
 <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
@@ -93,6 +100,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li><a class="twi" href="{{ request|twitter  }}"></a></li>
 				<li><a class="insta" href="{{ request|linkedin  }}"></a></li>
 				<li><a class="you" href="{{ request|youtube  }}"></a></li>
+				<li class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a  title="Notifications" style="border:3px solid #A0A0A0;color:#A0A0A0;padding:5px 6px;border-radius:47px;overflow:hidden" 
+					class="glyphicon glyphicon-bell" href="{{ request|youtube  }}"></a> 
+					<span style="background: green;
+					padding: 2px 9px;
+					color: #fff;
+					border-radius: 34px;
+					margin-top: -39px;
+					overflow: hidden;
+					z-index: 4;
+					position: absolute;
+					margin-left: -10px;"
+						
+					>{{request.user|CountNotification}}</span>
+					
+				</li>
+				{% if request.user|Notification %}
+				<div class="dropdown-menu" style="right:0;margin-left:10px">
+					{% for notifac  in request.user|Notification %}
+						<div>
+							<a class="dropdown-item" href="{% url 'notifac:is_read' notifac.pk %}" style="width:100%;overflow:hidden">{{notifac.message}}</a>
+						</div>
+					{% endfor %}
+				</div>
+				{% endif %}
 			</ul>
 		</div>
 		<div class="clearfix"></div>
