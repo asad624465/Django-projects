@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'coupon',
     'payment',
     'notification',
+    'dashboard',
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 MIDDLEWARE = [
