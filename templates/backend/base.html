@@ -2,7 +2,11 @@
 <html class="no-js" lang="en">
     {% load static %}
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock title %} | NeelGhuri</title>
     {% include 'backend/header_link.html'  %}
+    {% block dataTableCSS %}{% endblock dataTableCSS %}
 </head>
 
 <body>
@@ -707,6 +711,8 @@
     <script src="{% static 'backend/' %}js/morrisjs/raphael-min.js"></script>
     <script src="{% static 'backend/' %}js/morrisjs/morris.js"></script>
     <script src="{% static 'backend/' %}js/morrisjs/morris-active.js"></script>
+    
+    
     <!-- morrisjs JS
 		============================================ -->
     <script src="{% static 'backend/' %}js/sparkline/jquery.sparkline.min.js"></script>
@@ -717,6 +723,7 @@
     <script src="{% static 'backend/' %}js/calendar/moment.min.js"></script>
     <script src="{% static 'backend/' %}js/calendar/fullcalendar.min.js"></script>
     <script src="{% static 'backend/' %}js/calendar/fullcalendar-active.js"></script>
+    {% block datatable %}{% endblock datatable %}
     <!-- plugins JS
 		============================================ -->
     <script src="{% static 'backend/' %}js/plugins.js"></script>

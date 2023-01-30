@@ -307,7 +307,12 @@
 							
 					</div>
 					<div class="item-info-product ">
-						<h4><a href="{{product.get_product_url}}">{{product.name}}</a></h4>
+							{% if product.name|length < 15 %}
+								<h4><a href="{{product.get_product_url}}">{{product.name}}</a></h4>
+							{% else %}
+							<h4 ><a href="{{product.get_product_url}}">{{product.name|truncatechars:15}}</a></h4>
+							{% endif %}
+						
 						<div class="info-product-price" >
 							<span class="item_price" style="font-size:16px">Tk. {{product.price}}</span>
 							{% if product.old_price %}
