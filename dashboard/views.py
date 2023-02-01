@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from store.models import Category,Product,ProductImage,VariationValue,Banner
 from store.forms import *
+from django.contrib import messages
 #this is dashboard method
 class adminHome(TemplateView):
     def get(self,request, *args, **kwargs):
@@ -47,6 +48,7 @@ class addNewProduct(TemplateView):
                     slug=product.name.replace(' ','')
                     product.slug=slug
                     product.save()
+                    messages.success(request, 'Your data has been successfully submitted!')
                     return redirect('dashboard:product-list') 
                 else:
                     return redirect('dashboard:add-new-product') 
@@ -82,6 +84,7 @@ class updateProduct(TemplateView):
                     slug=product.name.replace(' ','')
                     product.slug=slug
                     product.save()
+                    messages.success(request, 'Your data has been successfully updated!')
                     return redirect('dashboard:product-list') 
                 else:
                     return redirect('dashboard:add-new-product') 
@@ -93,5 +96,6 @@ class deleteProduct(TemplateView):
     def get(self,request,pk,*args, **kwargs):
         product=Product.objects.get(id=pk)
         product.delete()
+        messages.success(request, 'You has been successfully removed data!')
         return redirect('dashboard:product-list') 
 

@@ -1,0 +1,72 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.wrapper{
+	width: 100%;
+	height: 100vh;
+	background: #3c5077;
+	display:flex ;
+	align-items: center;
+	justify-content: center;
+}
+.submit-button{
+	padding: 10px 60px;
+	background: #fff;
+	border: 0;
+	outline: none;
+	font-size: 20px;
+	font-weight: 500;
+	border-radius: 30px;
+	cursor: pointer;
+}
+.pop-up-message{
+	width: 280px;
+	background: #E6E6FA;
+	border-radius: 6px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%,-50%) scale(0.1);
+	text-align: center;
+	padding: 0 30px 30px;
+	color: #333;
+	visibility: hidden;
+	transition: transform 0.9s, top 0.9s;
+    z-index: 1;
+}
+.open-pop-up{
+	visibility: visible;
+	top: 50%;
+	transform: translate(-50%,-50%) scale(1.0);
+
+}
+.pop-up-message img{
+	width: 100px;
+	margin-top: -50px;
+	border-radius: 50%;
+	/*box-shadow: 0 2px 2px rgba(0,0,0,0.1);*/
+
+}
+.pop-up-message h2{
+	font-size: 38px;
+	font-weight: 500;
+	margin: 30px 0 10px;
+	color:green;
+}
+.okay-button{
+	width: 100%;
+	margin-top: 50px;
+	padding: 10px 0;
+	background: #6fd649;
+	color: #fff;
+	border: 0;
+	outline: none;
+	font-size: 18px;
+	border-radius: 4px;
+	cursor: pointer;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+
+
+}
