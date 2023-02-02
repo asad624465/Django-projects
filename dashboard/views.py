@@ -99,3 +99,11 @@ class deleteProduct(TemplateView):
         messages.success(request, 'You has been successfully removed data!')
         return redirect('dashboard:product-list') 
 
+#start category info from here
+class categoryList(TemplateView):
+    def get(self,request,*args, **kwargs):
+        categoryList=Category.objects.all().order_by('-id')
+        context={
+           'categoryList':categoryList 
+        }
+        return render(request,'backend/category/categoryList.html',context);

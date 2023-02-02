@@ -1,20 +1,21 @@
 
+{% load companyInfo %}
 <nav id="sidebar" class="">
     <div class="sidebar-header">
-        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-        <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
+        <a href="{% url 'dashboard:home' %}"><img class="main-logo" src="{{ request|companyLogo  }}" alt="" /></a>
+        <strong><a href="{% url 'dashboard:home' %}"><img src="{{ request|companyLogo  }}" alt="" /></a></strong>
     </div>
     <div class="left-custom-menu-adp-wrap comment-scrollbar">
         <nav class="sidebar-nav left-sidebar-menu-pro">
             <ul class="metismenu" id="menu1">
                 <li class="active">
-                    <a class="has-arrow" href="index.html">
+                    <a class="has-arrow" href="{% url 'dashboard:home' %}">
                            <span class="educate-icon educate-home icon-wrap"></span>
-                           <span class="mini-click-non">Education</span>
+                           <span class="mini-click-non">Basic Manage</span>
                         </a>
                     <ul class="submenu-angle" aria-expanded="true">
-                        <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
-                        <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
+                        <li><a title="Manage Product" href="{% url 'dashboard:product-list' %}"><span class="mini-sub-pro">Manage Product</span></a></li>
+                        <li><a title="Manage Category" href="{% url 'dashboard:category-list' %}"><span class="mini-sub-pro">Manage Category</span></a></li>
                         <li><a title="Dashboard v.3" href="index-2.html"><span class="mini-sub-pro">Dashboard v.3</span></a></li>
                         <li><a title="Analytics" href="analytics.html"><span class="mini-sub-pro">Analytics</span></a></li>
                         <li><a title="Widgets" href="widgets.html"><span class="mini-sub-pro">Widgets</span></a></li>
