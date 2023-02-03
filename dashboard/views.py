@@ -107,3 +107,29 @@ class categoryList(TemplateView):
            'categoryList':categoryList 
         }
         return render(request,'backend/category/categoryList.html',context);
+class addNewCategory(TemplateView):
+    def get(self,request,*args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.user_type=='developer':
+                categoryList=Category.objects.all().order_by('-id')
+                context={
+                    'categoryList':categoryList
+                }
+                return render(request,'backend/category/addCategory.html',context)
+            else:
+             return redirect('account:profile')    
+        else:
+           return redirect('store:index') 
+    def post(self,request,*args, **kwargs):
+        if request.method=='post' or request.method=='POST':
+            form_obj=CategoryForm(request.POST, request.FILES)
+            if form_obj.is_valid():
+                form_obj.save()
+                messages.success(request, 'Your data has been successfully updated!')
+                return redirect('dashboard:category-list')
+            else:
+                messages.success(request, 'Sorry! You are not valid user!')
+                return redirect('dashboard:category-list') 
+        else:
+            return redirect('store:index')     
+            
