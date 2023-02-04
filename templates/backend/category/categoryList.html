@@ -59,7 +59,7 @@
                                             
                                             <td><img src="{{ category.image.url }}" alt="{{category.name}}" style="height:100px"></td>
                                             <td>{{ category.createddate}}</td>
-                                            <td><a href="{% url 'dashboard:update-product' category.id %}" class="btn btn-info">Edit</a>
+                                            <td><a href="{% url 'dashboard:update-category' category.id %}" class="btn btn-info">Edit</a>
                                                 <a href="{% url 'dashboard:delete-product' category.id %}" class="btn btn-danger">Removed</a>
                                             </td>
                                         </tr>

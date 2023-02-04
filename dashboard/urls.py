@@ -10,4 +10,5 @@ urlpatterns = [
     #start category path from here
     path("category-list/",views.categoryList.as_view(), name="category-list"),
     path("add-new-category/",views.addNewCategory.as_view(), name="add-new-category"),
+    path("update-category/<int:pk>",views.updateCategory.as_view(), name="update-category"),
 ]

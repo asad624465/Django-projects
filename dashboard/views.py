@@ -132,4 +132,36 @@ class addNewCategory(TemplateView):
                 return redirect('dashboard:category-list') 
         else:
             return redirect('store:index')     
-            
+
+class updateCategory(TemplateView):   
+    def get(self,request,pk,*args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.user_type=='developer':
+                categoryList=Category.objects.all().order_by('-id')
+                category_obj=Category.objects.get(id=pk)
+                categoryById=CategoryForm(instance=category_obj)
+                context={
+                    'categoryList':categoryList,
+                    'categoryById':categoryById,
+                }
+                return render(request,'backend/category/editCategory.html',context)
+            else:
+             return redirect('account:profile')    
+        else:
+           return redirect('store:index') 
+
+    def post(self,request,pk, *args, **kwargs):
+        if request.user.user_type=='developer':
+            if request.method=='post' or request.method=='POST':
+                product_obj=Category.objects.get(id=pk)
+                form = CategoryForm(request.POST, request.FILES,instance=product_obj)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, 'Your data has been successfully updated!')
+                    return redirect('dashboard:category-list') 
+                else:
+                    return redirect('dashboard:add-new-category') 
+            else:
+                return redirect('dashboard:add-new-product') 
+        else:
+            return redirect('dashboard:add-new-product')              
