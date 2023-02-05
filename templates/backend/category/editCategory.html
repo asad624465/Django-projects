@@ -20,7 +20,7 @@
                                                             <input name="name" type="text" class="form-control" value='{{categoryById.name.value}}' placeholder="Product Name">
                                                         </div>
                                                         <div class="form-group">
-                                                            <select name="parent" class="form-control">
+                                                            <select name="parent" class="form-control category">
                                                                 <option value selected disabled="">Parent Category</option>
                                                                 {% for cat in categoryList %}
                                                                 <option value="{{cat.id}}">{{cat.name}}</option>
@@ -56,7 +56,7 @@
     </div>
 </div>
 <script>
-    $(".category option[value='{{product.name.category}}']").prop('selected',true);
+    $(".category option[value='4']").prop('selected',true);
 </script>
 {% endblock %}
 {% load static %}

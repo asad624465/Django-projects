@@ -164,4 +164,10 @@ class updateCategory(TemplateView):
             else:
                 return redirect('dashboard:add-new-product') 
         else:
-            return redirect('dashboard:add-new-product')              
+            return redirect('dashboard:add-new-product')    
+class deleteCategory(TemplateView): 
+    def get(self,request,pk,*args, **kwargs):
+        category=Category.objects.get(id=pk)
+        category.delete()
+        messages.success(request, 'You has been successfully removed data!')
+        return redirect('dashboard:category-list')          
