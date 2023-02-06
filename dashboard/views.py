@@ -16,12 +16,7 @@ class adminHome(TemplateView):
 #product views
 class productList(TemplateView):
     def get(self,request, *args, **kwargs):
-        productList=Product.objects.all().order_by('-id')
-        context={
-            'productList':productList
-        }
-        return render(request,'backend/product/productlist.html',context)
-    
+        return render(request,'backend/product/productlist.html',{'productList':getDataObject(Product)})
     def post(self,request, *args, **kwargs):
         pass
 #product views
@@ -29,11 +24,7 @@ class addNewProduct(TemplateView):
     def get(self,request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user.user_type=='developer':
-                categoryList=Category.objects.all().order_by('-id')
-                context={
-                    'categoryList':categoryList
-                }
-                return render(request,'backend/product/addProduct.html',context)
+                return render(request,'backend/product/addProduct.html',{'categoryList':getDataObject(Category)})
             else:
              return redirect('account:profile')    
         else:
@@ -61,14 +52,7 @@ class updateProduct(TemplateView):
     def get(self,request,pk,*args, **kwargs):
         if request.user.is_authenticated:
             if request.user.user_type=='developer':
-                categoryList=Category.objects.all().order_by('-id')
-                product_obj=Product.objects.get(id=pk)
-                product=ProductForm(instance=product_obj)
-                context={
-                    'categoryList':categoryList,
-                    'product':product,
-                }
-                return render(request,'backend/product/editProduct.html',context)
+                return render(request,'backend/product/editProduct.html',{'categoryList':getDataObject(Category),'product':ProductForm(instance=getDataObject(Product,pk))})
             else:
              return redirect('account:profile')    
         else:
@@ -77,8 +61,7 @@ class updateProduct(TemplateView):
     def post(self,request,pk, *args, **kwargs):
         if request.user.user_type=='developer':
             if request.method=='post' or request.method=='POST':
-                product_obj=Product.objects.get(id=pk)
-                form = ProductForm(request.POST, request.FILES,instance=product_obj)
+                form = ProductForm(request.POST, request.FILES,instance=getDataObject(Product,pk))
                 if form.is_valid():
                     product=form.save(commit=False) 
                     slug=product.name.replace(' ','')
@@ -94,7 +77,7 @@ class updateProduct(TemplateView):
             return redirect('dashboard:add-new-product')   
 class deleteProduct(TemplateView): 
     def get(self,request,pk,*args, **kwargs):
-        product=Product.objects.get(id=pk)
+        product=getDataObject(Product,pk)
         product.delete()
         messages.success(request, 'You has been successfully removed data!')
         return redirect('dashboard:product-list') 
@@ -102,20 +85,13 @@ class deleteProduct(TemplateView):
 #start category info from here
 class categoryList(TemplateView):
     def get(self,request,*args, **kwargs):
-        categoryList=Category.objects.all().order_by('-id')
-        context={
-           'categoryList':categoryList 
-        }
-        return render(request,'backend/category/categoryList.html',context);
+        return render(request,'backend/category/categoryList.html',{'categoryList':getDataObject(Category)});
+
 class addNewCategory(TemplateView):
     def get(self,request,*args, **kwargs):
         if request.user.is_authenticated:
             if request.user.user_type=='developer':
-                categoryList=Category.objects.all().order_by('-id')
-                context={
-                    'categoryList':categoryList
-                }
-                return render(request,'backend/category/addCategory.html',context)
+                return render(request,'backend/category/addCategory.html',{'categoryList':getDataObject(Category)})
             else:
              return redirect('account:profile')    
         else:
@@ -137,14 +113,7 @@ class updateCategory(TemplateView):
     def get(self,request,pk,*args, **kwargs):
         if request.user.is_authenticated:
             if request.user.user_type=='developer':
-                categoryList=Category.objects.all().order_by('-id')
-                category_obj=Category.objects.get(id=pk)
-                categoryById=CategoryForm(instance=category_obj)
-                context={
-                    'categoryList':categoryList,
-                    'categoryById':categoryById,
-                }
-                return render(request,'backend/category/editCategory.html',context)
+                return render(request,'backend/category/editCategory.html',{'categoryList':getDataObject(Category),'categoryById':CategoryForm(instance=getDataObject(Category,pk))})
             else:
              return redirect('account:profile')    
         else:
@@ -153,8 +122,7 @@ class updateCategory(TemplateView):
     def post(self,request,pk, *args, **kwargs):
         if request.user.user_type=='developer':
             if request.method=='post' or request.method=='POST':
-                product_obj=Category.objects.get(id=pk)
-                form = CategoryForm(request.POST, request.FILES,instance=product_obj)
+                form = CategoryForm(request.POST, request.FILES,instance=producgetDataObject(Category,pk)t_obj)
                 if form.is_valid():
                     form.save()
                     messages.success(request, 'Your data has been successfully updated!')
@@ -167,7 +135,10 @@ class updateCategory(TemplateView):
             return redirect('dashboard:add-new-product')    
 class deleteCategory(TemplateView): 
     def get(self,request,pk,*args, **kwargs):
-        category=Category.objects.get(id=pk)
+        category=getDataObject(Category,pk)
         category.delete()
         messages.success(request, 'You has been successfully removed data!')
-        return redirect('dashboard:category-list')          
+        return redirect('dashboard:category-list')   
+
+def getDataObject(Model,pk=None):
+    return  Model.objects.get(id=pk) if pk else Model.objects.all().order_by('-id')
